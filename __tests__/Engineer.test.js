@@ -24,6 +24,6 @@ test('get role from getRole() method', () => {
     expect(engineer.getRole()).toBe('Engineer');
 });
 
-test('get number from getOfficeNumber() method', () => {
+test('get gitHub username from getGitHub() method', () => {
     expect(engineer.getGitHub()).toBe('billybcool27');
 });
