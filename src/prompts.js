@@ -1,6 +1,10 @@
 const inquirer = require('inquirer');
+const Manager = require('../lib/Manager');
+const Engineer = require('../lib/Engineer');
+const Intern = require('../lib/Intern');
+const teamMembers = [];
 
-const promptUser = ( )=> {
+const promptManager = ( ) => {
    return inquirer.prompt([
        {
            type: 'input',
@@ -43,7 +47,7 @@ const promptUser = ( )=> {
         },
         {
             type: 'input',
-            name: 'office-number',
+            name: 'officeNumber',
             message: 'Enter the office number of the team manager (Required)',
             validate: nameInput => {
                 if (nameInput) {
@@ -55,9 +59,14 @@ const promptUser = ( )=> {
             }
         },
    ])
+   .then(answers => {
+       const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+       teamMembers.push(manager);
+       promptMenu();
+   })
 };
 
-const promptEngineer = teamData => {
+const promptEngineer = () => {
     console.log(`
 ==================
 Add a New Engineer
@@ -117,13 +126,14 @@ Add a New Engineer
              }
          },
     ])
-    .then(memberData => {
-        teamData.push(memberData);
-        return promptTeam(teamData)
+    .then(answers => {
+        const engineer = new Engineer(answers.name, answers.id, answers.email, answers.gitHub);
+        teamMembers.push(engineer);
+        promptMenu();
     })
 };
 
-const promptIntern = teamData => {
+const promptIntern = () => {
     console.log(`
 ================
 Add a New Intern
@@ -171,7 +181,7 @@ Add a New Intern
          },
          {
              type: 'input',
-             name: 'gitHub',
+             name: 'school',
              message: 'Enter the school name of this team member (Required)',
              validate: nameInput => {
                  if (nameInput) {
@@ -183,71 +193,40 @@ Add a New Intern
              }
          },
     ])
-    .then(memberData => {
-        teamData.push(memberData);
-        return promptTeam(teamData)
+    .then(answers => {
+        const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
+        teamMembers.push(intern);
+        promptMenu();
     })
 };
 
-const promptTeam = teamData => {
-   // If there's no 'teamMembers' array, create it
-   if (!teamData.teamMembers) {
-       teamData.teamMembers = [];
-   }
+const buildTeam = () => {
+    console.log(teamMembers);
+    };
+
+const promptMenu = () => {
     return inquirer.prompt([
         {
             type: 'list',
-            name: 'addTeamMember',
+            name: 'menu',
             message: 'Make a choice:',
-            choices: ['Add an engineer', 'Add an intern', 'Finish building the team', ],
-            default: 'Finish building the team'
-        },
-        
+            choices: ['Add an engineer', 'Add an intern', 'Finish building the team' ],
+        },   
     ])
-    .then(teamChoice => {
-        if (teamChoice.addTeamMember === 'Add an engineer') {
-            promptEngineer(teamData);
-        }
-        if (teamChoice.addTeamMember === 'Add an intern') {
-            promptIntern(teamData);
-        } 
-        if (teamChoice.addTeamMember === 'Finish building the team') {
-        console.log('Finished building team');
-        return teamData;
-        
+    .then(choice => {
+        switch (choice.menu) {
+            case 'Add an engineer':
+                promptEngineer();
+                break;
+            case 'Add an intern':
+                promptIntern();
+                break;
+            default:
+                buildTeam();
         }
     })
 };
-const promptPractice = () => {
-let teamData = [];
-let repeat = true;
-do {
-   teamData.push(
-      await inquirer.prompt([{
-            type: "input",
-            name: "firstname",
-            message: "Enter firstname",
-         },
-         {
-            type: "input",
-            name: "lastname",
-            message: "Enter lastname",
-         },
-      ])
-   );
-   repeat = (
-      await inquirer.prompt([{
-         type: "confirm",
-         name: "repeat",
-         message: "Do you want to add another person ?",
-      }, ])
-   ).repeat;
-} while (repeat);
 
-console.log(teamData);
-
-}
 module.exports = {
-    promptPractice
-    
+    promptManager   
 };
