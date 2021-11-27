@@ -1,0 +1,37 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+header {
+    background-color: blueviolet;
+    color:ghostwhite;
+    text-align: center;
+    padding: 50px 0;
+    font-size: calc(1.9rem + 1.5vw);
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.card-holder {
+    justify-content: center;
+}
+.card {
+    margin: 5px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding:0;
+}
+
+.card-title {
+    background-color: springgreen;
+    text-align: center;
+    color:ghostwhite;
+    margin:0;
+}
+
+p {
+    text-align: center;
+}

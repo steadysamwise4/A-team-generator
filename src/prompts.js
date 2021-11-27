@@ -211,6 +211,7 @@ const promptMenu = () => {
             name: 'menu',
             message: 'Make a choice:',
             choices: ['Add an engineer', 'Add an intern', 'Finish building the team' ],
+            default: 'Finish building the team'
         },   
     ])
     .then(choice => {
