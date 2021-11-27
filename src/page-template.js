@@ -1,8 +1,55 @@
+// const mockData = [
+//     {
+//        name: 'Buddy Bell',
+//        id: '14',
+//        email: 'buddyb@royals',
+//        role: 'Manager',
+//        officeNumber: '1'
+//     },
+//     {
+//         name: 'Tony Pena',
+//         id: '15',
+//         email: 'tonyp@royals',
+//         role: 'Engineer',
+//         gitHub: 'tonypositive03'
+//      },
+//      {
+//         name: 'Ned Yost',
+//         id: '18',
+//         email: 'nedy@royals',
+//         role: 'Engineer',
+//         gitHub: 'wontheseries15'
+//      },
+//      {
+//         name: 'Dick Houser',
+//         id: '8',
+//         email: 'dickh@royals',
+//         role: 'Engineer',
+//         gitHub: '85royalsteam'
+//      },
+//      {
+//         name: 'Trey Hillman',
+//         id: '16',
+//         email: 'treyh@royals',
+//         role: 'Intern',
+//         school: 'Hard Knocks'
+//      },
+//      {
+//         name: 'Tony Muser',
+//         id: '13',
+//         email: 'tonym@royals',
+//         role: 'Intern',
+//         school: 'Sweeny'
+//      },
+// ]
+
+
+
 
 const generateTeamMembers = teamDataArr => {
     return `
     <section class="row card-holder">
-    ${teamDataArr.filter(({ role }) => role = 'Manager')
+    ${teamDataArr.filter(({ role }) => role === 'Manager')
                 .map(({name, id, email, role, officeNumber}) => {
         return `
             <div class="card col-12 col-md-6 col-lg-4 col-xl-3">
@@ -16,7 +63,7 @@ const generateTeamMembers = teamDataArr => {
     })
     .join('')}
 
-    ${teamDataArr.filter(({ role }) => role = 'Engineer')
+    ${teamDataArr.filter(({ role }) => role === 'Engineer')
                 .map(({name, id, email, role, gitHub}) => {
         return `
             <div class="card col-12 col-md-6 col-lg-4 col-xl-3">
@@ -30,7 +77,7 @@ const generateTeamMembers = teamDataArr => {
     })
     .join('')}
 
-    ${teamDataArr.filter(({ role }) => role = 'Intern')
+    ${teamDataArr.filter(({ role }) => role === 'Intern')
                 .map(({name, id, email, role, school}) => {
         return `
             <div class="card col-12 col-md-6 col-lg-4 col-xl-3">
@@ -48,9 +95,9 @@ const generateTeamMembers = teamDataArr => {
 };
 
 
-module.exports = templateData => {
+module.exports = (templateData) => {
     // destructure data
-
+console.log(templateData);
 
     return `
     <!DOCTYPE html>
@@ -68,54 +115,12 @@ module.exports = templateData => {
         <h1 class="page-title">Buddy's Team</h1>
     </header>
     <main class="container">
-
-        // <section class="row card-holder">
-        //     <div class="card col-12 col-md-6 col-lg-4 col-xl-3">
-        //         <h3 class="card-title">Manager</h3>
-        //         <p>Buddy Bell</p>
-        //         <p>Employee Id: 14</p>
-        //         <p>email: billyb@royals.com</p>
-        //         <p>Office Number: 1</p>
-        //     </div>
-        //     <div class="card col-12 col-md-6 col-lg-4 col-xl-3">
-        //         <h3 class="card-title">Manager</h3>
-        //         <p>Buddy Bell</p>
-        //         <p>Employee Id: 14</p>
-        //         <p>email: billyb@royals.com</p>
-        //         <p>Office Number: 1</p>
-        //     </div>
-        //     <div class="card col-12 col-md-6 col-lg-4 col-xl-3">
-        //         <h3 class="card-title">Manager</h3>
-        //         <p>Buddy Bell</p>
-        //         <p>Employee Id: 14</p>
-        //         <p>email: billyb@royals.com</p>
-        //         <p>Office Number: 1</p>
-        //     </div>
-        //     <div class="card col-12 col-md-6 col-lg-4 col-xl-3">
-        //         <h3 class="card-title">Manager</h3>
-        //         <p>Buddy Bell</p>
-        //         <p>Employee Id: 14</p>
-        //         <p>email: billyb@royals.com</p>
-        //         <p>Office Number: 1</p>
-        //     </div>
-        //     <div class="card col-12 col-md-6 col-lg-4 col-xl-3">
-        //         <h3 class="card-title">Manager</h3>
-        //         <p>Buddy Bell</p>
-        //         <p>Employee Id: 14</p>
-        //         <p>email: billyb@royals.com</p>
-        //         <p>Office Number: 1</p>
-        //     </div>
-        //     <div class="card col-12 col-md-6 col-lg-4 col-xl-3">
-        //         <h3 class="card-title">Manager</h3>
-        //         <p>Buddy Bell</p>
-        //         <p>Employee Id: 14</p>
-        //         <p>email: billyb@royals.com</p>
-        //         <p>Office Number: 1</p>
-        //     </div>
-        // </section>
+        ${generateTeamMembers(templateData)}
+        
     </main>
     
 </body>
 </html>
     `
 }
+

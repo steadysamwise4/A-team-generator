@@ -3,6 +3,10 @@ const Manager = require('../lib/Manager');
 const Engineer = require('../lib/Engineer');
 const Intern = require('../lib/Intern');
 const teamMembers = [];
+const generatePage = require('./page-template');
+const fs = require('fs');
+const path = require('path');
+const distDir = path.resolve(__dirname, '../dist');
 
 const promptManager = ( ) => {
    return inquirer.prompt([
@@ -129,7 +133,7 @@ Add a New Engineer
     ])
     .then(answers => {
         answers.role = 'Engineer';
-        const engineer = new Engineer(answers.name, answers.id, answers.email, answers.gitHub);
+        const engineer = new Engineer(answers.name, answers.id, answers.email, answers.role, answers.gitHub);
         teamMembers.push(engineer);
         promptMenu();
     })
@@ -197,14 +201,17 @@ Add a New Intern
     ])
     .then(answers => {
         answers.role = 'Intern';
-        const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
+        const intern = new Intern(answers.name, answers.id, answers.email, answers.role, answers.school);
         teamMembers.push(intern);
         promptMenu();
     })
 };
 
 const buildTeam = () => {
-    console.log(teamMembers);
+    if (!fs.existsSync(distDir)) {
+        fs.mkdirSync(distDir);
+    } 
+    return fs.writeFileSync(path.join(distDir, 'team.html'), generatePage(teamMembers), 'utf-8' )
     };
 
 const promptMenu = () => {
