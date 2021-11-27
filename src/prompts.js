@@ -60,7 +60,8 @@ const promptManager = ( ) => {
         },
    ])
    .then(answers => {
-       const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+       answers.role = 'Manager';
+       const manager = new Manager(answers.name, answers.id, answers.email, answers.role, answers.officeNumber);
        teamMembers.push(manager);
        promptMenu();
    })
@@ -127,6 +128,7 @@ Add a New Engineer
          },
     ])
     .then(answers => {
+        answers.role = 'Engineer';
         const engineer = new Engineer(answers.name, answers.id, answers.email, answers.gitHub);
         teamMembers.push(engineer);
         promptMenu();
@@ -194,6 +196,7 @@ Add a New Intern
          },
     ])
     .then(answers => {
+        answers.role = 'Intern';
         const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
         teamMembers.push(intern);
         promptMenu();
