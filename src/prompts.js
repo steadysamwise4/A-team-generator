@@ -211,7 +211,7 @@ const buildTeam = () => {
     if (!fs.existsSync(distDir)) {
         fs.mkdirSync(distDir);
     } 
-    return fs.writeFileSync(path.join(distDir, 'team.html'), generatePage(teamMembers), 'utf-8' )
+    return fs.writeFileSync(path.join(distDir, 'team.html'), generatePage(teamMembers), 'utf-8' )      
     };
 
 const promptMenu = () => {
