@@ -21,7 +21,7 @@ Clone the repo to your local computer. Navigate to the directory in your termina
 Enter the command 'npm start' in the command line. Your html file will be generated in the /dist folder. An existing assets subfolder holds a style.css file which styles the generated html page.
 ![screenshot of application](./images/demoPic.png)
 
-[Demo Video](./images/demVideo.webm)
+[Demo Video](https://drive.google.com/file/d/12kfNdapRKeLZQiHlRZDNcLURCpcX-6Mw/view)
 
 ## License <a name="license"></a>
 [MIT](https://opensource.org/licenses/MIT)
